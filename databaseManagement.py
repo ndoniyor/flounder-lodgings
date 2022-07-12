@@ -1,6 +1,8 @@
 import os
 import sqlite3
-from roomClass import room
+from roomClass import Room, RoomStatus
+
+from datetime import datetime
 
 def initDB():
     roomList = dict()
@@ -26,5 +28,11 @@ def initDB():
     #     print("Database is empty.")
     #     return None
     # return roomList 
+
+def get_dummy_roomlist():
+    room_list = []
+    room_list.append(Room('1A', '1B 1BR', 500, RoomStatus.VACANT))
+    room_list.append(Room('1B', '1B 1BR', 500, RoomStatus.UNAVAILABLE, datetime.now()))
+    return room_list
 
 initDB()
