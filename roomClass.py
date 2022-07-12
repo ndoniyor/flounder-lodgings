@@ -13,7 +13,7 @@ class Room:
         self.status = status
         self.checkout_time = time
 
-    def __repr__(self):
+    def __str__(self):
         if self.status == RoomStatus.VACANT:
             return (f'{self.room_number} - {self.info} ${self.price}/night')
         elif self.status == RoomStatus.UNAVAILABLE:
