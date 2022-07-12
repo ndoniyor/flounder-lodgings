@@ -24,10 +24,10 @@ class room:
         if(printAll == True):
             if(self.status!='VACANT'):
                 print("UNAVAILABLE",end=" ")
-            print(self.number, '-', *self.info, "$"+self.price+'/night',self.status, self.time, sep=" ")
+            print(self.number, '-', self.info, "$"+self.price+'/night',self.status, self.time, sep=" ")
         else:
             if((self.status=='VACANT')):
-                print(self.number, '-', *self.info, "$"+self.price+'/night', sep=" ")
+                print(self.number, '-', self.info, "$"+self.price+'/night', sep=" ")
 
 
     
