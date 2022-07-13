@@ -1,4 +1,5 @@
 # flounder-lodgings
+Hotel management service for me to learn whatever I think is cool in Python. Currently run on command line, might transition to web app.
 ##### Menu so far:
 * Make reservation (currently only shows unoccupied rooms)
 * Look at all rooms regardless of status
