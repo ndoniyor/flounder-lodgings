@@ -1,27 +1,35 @@
 import os
 import sqlite3
 from room_class import Room
-from datetime import datetime
+import datetime
 
 database = sqlite3.connect('roomdb.db')
 cursor = database.cursor()
+
+def update_listings():
+    today = datetime.date.today()
+    tomorrow = (today + datetime.timedelta(days=1))
+    cursor.execute(f"update rooms set roomStatus = 'CLEANING', roomTime = '{tomorrow.strftime('%Y-%m-%d')}' where roomTime = '{today.strftime('%Y-%m-%d')}'")
+    database.commit()
+    cursor.execute(f"update rooms set roomStatus = 'VACANT', roomTime = '' where roomTime < '{today.strftime('%Y-%m-%d')}'")
+    database.commit()
+    #cursor.execute("select * from rooms order by roomNo")
+    #print(cursor.fetchall())
+
 def init_DB():
+    update_listings()
     roomList = dict()
     cursor.execute("SELECT EXISTS(SELECT 1 FROM rooms WHERE roomNo = '1A')") #fix so that it detects if db is empty
     if(cursor.fetchone()==(1,)):
-        return 0
+        return
     for row in cursor.execute('SELECT * from rooms ORDER BY roomNo'):
         roomNo, roomInfo, roomPrice, roomStatus, roomDate = row
-        roomList[roomNo] = roomNo, roomInfo, roomPrice, roomStatus, roomDate
+        roomList[roomNo] = roomInfo, roomPrice, roomStatus, roomDate
+    return roomList
 
 def search_query(bed_count, price_range, date_range):
     valid_rooms = list()
-    cursor.execute("SELECT * from rooms WHERE roomStatus = 'VACANT' ORDER BY roomNo")
-    for roomNo, roomInfo, roomPrice, roomStatus, roomDate in cursor.fetchall(): 
-        user_bed_count, user_price_ceiling, user_date_range = input("Enter your desired bed count, price ceiling and date range: ")
-        user_bed_count = str(user_bed_count) + "BED"
-        #! for following line need to add comparator to return items that match the range
-        cursor.execute(f"SELECT * from rooms WHERE roomInfo = {user_bed_count} AND roomPrice <= {user_price_ceiling} AND ORDER BY roomNo")   
+    cursor.execute(f"SELECT * from rooms WHERE roomInfo >= {bed_count} AND roomPrice <= {price_range} AND (roomStatus = 'VACANT' OR roomTime < {date_range});")
+    for i in cursor.fetchall():
+        valid_rooms.append(i)
     return valid_rooms
-roonList = init_DB()
-valid = search_query(2,3,4)

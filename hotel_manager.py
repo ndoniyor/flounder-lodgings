@@ -1,9 +1,10 @@
 from room_class import Room, RoomStatus
-import database_management
+from database_management import init_DB, search_query
 import sys
 
 print("Welcome to Flounder Lodgings! Select an option: ")
-roomList = database_management.initDB()
+roomList = init_DB()
+
 while(True):
     choice = input(("----------\n1 - Search for room\n2 - Check in\n3 - Check out\n4 - Print all rooms\nx - Quit"))
     if choice == '1':
