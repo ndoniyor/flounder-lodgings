@@ -12,4 +12,3 @@ Hotel management service for me to learn whatever I think is cool in Python. Cur
 - [ ] Add search feature to satisfy various requests for room accomodations (Partially complete, can currently search for rooms with >= bed count, <= price, and > date
   - [ ] Need to add functionality to show rooms that satisfy some of the requirements if no exact matches are found.
   - [ ] Need to add functionality for rooms to be booked for multiple ranges, not just up to a single date. 
-# flounder-lodgings
