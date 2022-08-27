@@ -2,6 +2,8 @@ from room_class import Room, RoomStatus
 from database_management import init_DB, search_query
 import sys
 
+#test
+
 print("Welcome to Flounder Lodgings! Select an option: ")
 roomList = init_DB()
 
