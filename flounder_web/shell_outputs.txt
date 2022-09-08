@@ -1,0 +1,6 @@
+BEGIN;
+--
+-- Create model Room
+--
+CREATE TABLE "rooms_room" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "room_number" integer NOT NULL, "bed_count" integer NOT NULL, "price" integer NOT NULL, "status" text NOT NULL, "checkout_time" date NOT NULL);
+COMMIT;
